@@ -120,6 +120,10 @@ class Pythia8(AutotoolsPackage):
     conflicts("+hdf5", when="@:8.304", msg="HDF5 support was added in 8.304")
     conflicts("+hdf5", when="~mpich", msg="MPICH is required for reading HDF5 files")
 
+    @when("@:8.311") 
+    def patch(self): 
+        filter_file("\|;n'", "|'", "configure")
+
     def configure_args(self):
         args = []
 
